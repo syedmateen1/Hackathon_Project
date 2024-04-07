@@ -15,6 +15,11 @@ public class LanguageLearn extends BasePage{
 		super(driver);
 	}
 	
+	
+			
+	@FindBy(xpath="(//a[@class='cds-119 cds-113 cds-115 css-ia3qe1 cds-142'])[1]")
+	WebElement checkFBS;
+			
 	//SearchBox:
 	@FindBy(xpath="(//input[@placeholder='What do you want to learn?'])[1]")
 	WebElement searchBox;
@@ -38,6 +43,16 @@ public class LanguageLearn extends BasePage{
     //For Enterprise:
     @FindBy(xpath="//a[normalize-space()='For Enterprise']")
 	WebElement enterprise;
+    
+    public void navigateToForBusiness(){
+    	
+    	checkFBS.click();
+    }
+    
+    public boolean availFBS(){
+    	
+    	return checkFBS.isDisplayed();
+    }
     
     public void clearSearch() {
     	JavascriptExecutor js=(JavascriptExecutor)driver;

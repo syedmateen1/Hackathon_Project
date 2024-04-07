@@ -1,15 +1,18 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import factory.BaseClass;
+
 public class HomePage extends BasePage {
 
-	public HomePage(WebDriver d)
+	public HomePage(WebDriver driver)
 	{
-		super(d);
+		super(driver);
 	}
 	
 	JavascriptExecutor js=(JavascriptExecutor)driver;
@@ -19,6 +22,11 @@ public class HomePage extends BasePage {
 	
 	@FindBy(xpath="//button[@class='nostyle search-button']") 
 	WebElement searchButton;
+	
+	public String getTitle() {
+		String title=driver.getTitle();
+		return title;
+	}
 	
 	public boolean isSearchInputBoxPresent() {
 		Boolean result=searchInputBox.isDisplayed();
@@ -42,7 +50,19 @@ public class HomePage extends BasePage {
 	
 	public void search(String value) {
 		searchInputBox.sendKeys(value);
+		js.executeScript("arguments[0].click()",searchButton);
 	}
+	
+	public Boolean searchResult(String exp) {
+		String result=BaseClass.getDriver().findElement(By.xpath("//div[@class='rc-SearchResultsHeader']//span")).getText();
+	    if(result.contains(exp)) {
+	    	return true;
+	    }else
+	    {
+	    	return false;
+	    }
+	}
+	
 	public void clickSearchInputBox()
 	{
 		searchInputBox.click();

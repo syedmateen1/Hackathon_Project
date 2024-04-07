@@ -14,14 +14,12 @@ public class FirstCoursePage extends BasePage {
 
 	public static String firstCourseWindow;
 	public static String secondCourseWindow;
-
+	public WebDevPage wdp;
 	
 	public FirstCoursePage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-
-	public WebDevPage wdp;
 	
 	
 	

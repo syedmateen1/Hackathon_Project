@@ -7,8 +7,8 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-					features= {".//logs/Features"},
-					//features= {".//Features/Login.feature"},
+//					features= {".//logs/Features"},
+					features= {".//Features/TS_003_Language_and_Level_Filters.feature"},
 					//features= {".//Features/LoginDDTExcel.feature"},
 //					features= {".//Features/Login.feature",".//Features/Registration.feature"},
 					//features= {"@target/rerun.txt"},
@@ -20,7 +20,7 @@ import io.cucumber.junit.CucumberOptions;
 							
 					dryRun=false,    // checks mapping between scenario steps and step definition methods
 					monochrome=true,    // to avoid junk characters in output
-					publish=true   // to publish report in cucumber server
+					publish=false   // to publish report in cucumber server
 					//tags="@sanity"  // this will execute scenarios tagged with @sanity
 					//tags="@regression"
 					//tags="@sanity and @regression" //Scenarios tagged with both @sanity and @regression
