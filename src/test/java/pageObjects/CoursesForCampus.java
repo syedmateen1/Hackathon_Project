@@ -82,11 +82,11 @@ public class CoursesForCampus extends BasePage{
 	WebElement state;
 	
 	//Needs:
-	@FindBy(xpath="//select[@id='What_the_lead_asked_for_on_the_website__c']")
+	@FindBy(id="What_the_lead_asked_for_on_the_website__c")
 	WebElement needs;
 	
 	//Submit:
-	@FindBy(xpath="//button[normalize-space()='Submit']")
+	@FindBy(xpath="//button[@class='mktoButton']")
 	WebElement submit;
 	
 	//ErrorMsg:
@@ -123,6 +123,9 @@ public class CoursesForCampus extends BasePage{
 	@FindBy(xpath="//div[@id='ValidMsgWhat_the_lead_asked_for_on_the_website__c']")
 	WebElement errormsgneed;
 	
+	
+	@FindBy(xpath="//*[@class='cds-119 css-1euneyv cds-121']")
+	WebElement successMsg;
 	
 	
 	
@@ -364,6 +367,7 @@ public class CoursesForCampus extends BasePage{
 	public boolean checkNeeds(String need) {
 		
 		String temp=needs.getAttribute("value");
+//		System.out.println(temp);
 		return temp.equals(need);
 	
 	}
@@ -376,13 +380,19 @@ public class CoursesForCampus extends BasePage{
 		return temp.equals(need);
 	}
 	
-	public void clickSubmit() {
-		submit.click();
+	public void clickSubmit() throws InterruptedException {
+		js.executeScript("arguments[0].click();",submit);
+//		submit.click();
 	}
 	
 	
 	
 	public String getEMemail() {
 		return errormsgemail.getText(); 
+	}
+	
+	public boolean CheckFormSubmit(String exp) {
+//		System.out.println(successMsg.getText());
+		return exp.equals(successMsg.getText());
 	}
 }

@@ -14,7 +14,7 @@ import pageObjects.LanguageLearn;
 import pageObjects.WebDevPage;
 import utilities.ExcelReadWrite;
 
-public class TC_FBS_22_Country_Invalid_Input {
+public class TC_FBS_26_Needs_Invalid_Input {
 
 	WebDriver driver;
     HomePage hp;
@@ -24,13 +24,14 @@ public class TC_FBS_22_Country_Invalid_Input {
     List<HashMap<String, String>> datamap;
     String filepath =System.getProperty("user.dir")+"\\testData\\TestData.xlsx";
     
-    @Then("The respective {string} error message of country should be displayed")
-    public void the_respective_error_message_of_country_should_be_displayed(String row) {
+
+    @Then("The respective {string} error message of need dropdown should be displayed")
+    public void the_respective_error_message_of_need_dropdown_should_be_displayed(String row) {
     	try {
 	    	int index=Integer.parseInt(row)-1;
 			String errMsg = ExcelReadWrite.getCellData(filepath,"sheet1",index,7);
 //			System.out.println(errMsg);
-			boolean exp=CFC.getEMcountry(errMsg);
+			boolean exp=CFC.getEMneed(errMsg);
 			
 			Assert.assertEquals(exp,true);
 	    }

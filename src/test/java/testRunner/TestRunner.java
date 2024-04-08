@@ -8,7 +8,7 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 //					features= {".//logs/Features"},
-					features= {".//Features/TS_003_Language_and_Level_Filters.feature"},
+					features= {".//Features/TS_006_For_Business_Sect.feature"},
 					//features= {".//Features/LoginDDTExcel.feature"},
 //					features= {".//Features/Login.feature",".//Features/Registration.feature"},
 					//features= {"@target/rerun.txt"},
