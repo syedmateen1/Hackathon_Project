@@ -14,9 +14,10 @@ public class HomePage extends BasePage {
 	{
 		super(driver);
 	}
+	  
 	
 	JavascriptExecutor js=(JavascriptExecutor)driver;
-	
+	//Finding WebElements 
 	@FindBy(xpath="//*[@placeholder='What do you want to learn?']") 
 	WebElement searchInputBox;
 	
@@ -65,6 +66,7 @@ public class HomePage extends BasePage {
 	
 	public void clickSearchInputBox()
 	{
+		
 		searchInputBox.click();
 	}
 	
@@ -75,7 +77,7 @@ public class HomePage extends BasePage {
 	
 	public void clickSearchButton()
 	{
-		
+		BaseClass.getLogger().info("Clicking search button");
 		js.executeScript("arguments[0].click();",searchButton);
 
 	}
@@ -91,4 +93,8 @@ public class HomePage extends BasePage {
 			return true;
 		}
 	}
+	
+	public void PageClose() {
+	      driver.close();
+	   }
 }

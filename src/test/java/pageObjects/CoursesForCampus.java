@@ -1,7 +1,6 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,7 +13,10 @@ public class CoursesForCampus extends BasePage{
 
 	public CoursesForCampus(WebDriver driver) {
 		super(driver);
-	}
+	}                                                          //Finding WebElements 
+	//ErrorMsg:
+		@FindBy(xpath="//div[@id='ValidMsgEmail']")
+		WebElement errormsg;
 	
 	//By var
 	By business=By.xpath("//img[@alt='Coursera for Business']");
@@ -145,7 +147,7 @@ public class CoursesForCampus extends BasePage{
 		
 	}
 	public void enterprise() {
-		enterprise.click();
+		js.executeScript("arguments[0].click();",enterprise);
 	}
 	public boolean checkForm() {
 		
@@ -153,8 +155,7 @@ public class CoursesForCampus extends BasePage{
 		
 	}
 	
-	public void form() {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
+	public void form() { 
 		js.executeScript("arguments[0].scrollIntoView();",form);
 	}
 	
@@ -289,7 +290,6 @@ public class CoursesForCampus extends BasePage{
 	}
 	
 	public void learners(String lcount) throws InterruptedException{
-		Thread.sleep(2000);
 		Select learner=new Select(learners); 
 		learner.selectByVisibleText(lcount);
 	}
@@ -339,7 +339,6 @@ public class CoursesForCampus extends BasePage{
 	}
 	
 	public void state(String stateName) throws InterruptedException {
-		Thread.sleep(2000);
 		Select state1=new Select(state);  
 		state1.selectByVisibleText(stateName);
 	}
@@ -380,9 +379,8 @@ public class CoursesForCampus extends BasePage{
 		return temp.equals(need);
 	}
 	
-	public void clickSubmit() throws InterruptedException {
+	public void clickSubmit() {
 		js.executeScript("arguments[0].click();",submit);
-//		submit.click();
 	}
 	
 	
@@ -390,9 +388,24 @@ public class CoursesForCampus extends BasePage{
 	public String getEMemail() {
 		return errormsgemail.getText(); 
 	}
+	public boolean getErrorMsg() {
+
+			System.out.println("************The Error is************");
+
+			System.out.println(errormsg.getText()); 
+			
+			if(errormsg.getText().contains("Must be valid email."))
+			{
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+	}
 	
 	public boolean CheckFormSubmit(String exp) {
-//		System.out.println(successMsg.getText());
 		return exp.equals(successMsg.getText());
 	}
+	
 }

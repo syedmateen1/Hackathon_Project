@@ -13,7 +13,7 @@ public class BasePage {
 	   public WebDriverWait mywait;
 	   public JavascriptExecutor js;
     
-	   public BasePage(WebDriver driver){
+	   public BasePage(WebDriver driver){    //Initializing driver,wait,JS,PageFactory
 		   
 		     this.driver=driver;
 		     mywait=new WebDriverWait(driver,Duration.ofSeconds(10));

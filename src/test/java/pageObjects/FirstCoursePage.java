@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import factory.BaseClass;
 import junit.framework.Assert;
 
 public class FirstCoursePage extends BasePage {
@@ -16,13 +17,16 @@ public class FirstCoursePage extends BasePage {
 	public static String secondCourseWindow;
 	public WebDevPage wdp;
 	
+	private static String pid;
+	private static String child;
+	
 	public FirstCoursePage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
 	
 	
-	
+	// Finding Web Elements
 	@FindBy(xpath="//*[@id='rendered-content']/div/main/section[2]/div/div/div[1]/div[1]/section/h1")
 	public WebElement firstCourseTitle;
 
@@ -57,16 +61,23 @@ public class FirstCoursePage extends BasePage {
 	
 	public void firstCourseDetails()
 	{
-		
-		driver.switchTo().window(firstCourseWindow);
+		BaseClass.getLogger().info("Getting the first first course details");
 		WebDevPage.courseTitles.add(firstCourseTitle.getText());
 		WebDevPage.courseHours.add(firstCourseHours.getText());
 		WebDevPage.courseRatings.add(firstCourseRating.getText());
-		
+		System.out.println("**********************************************************************************************");
+		System.out.println("First Course");
+		System.out.println("Title : "+WebDevPage.courseTitles.get(0));
+		System.out.println("Hours : "+WebDevPage.courseHours.get(0));
+		System.out.println("Rating : "+WebDevPage.courseRatings.get(0));
+		System.out.println("**********************************************************************************************");		
 		
 	}
 	
-	
+	public void backToWindowF() throws InterruptedException
+	{
+		driver.switchTo().window(pid);	
+   }
 	
 	public void getWindowHandles()
 	{
@@ -85,24 +96,27 @@ public class FirstCoursePage extends BasePage {
 				secondCourseWindow=i;
 			}
 		}
-
+		BaseClass.getLogger().info("Getting windows handles");
    }
 	
 	public void getWindowHandlesListF() throws InterruptedException
 	{
 		
+
 		Set<String> windows=driver.getWindowHandles();
 		List<String> windlist = new ArrayList<String>(windows);
-		driver.switchTo().window(windlist.get(1));	
+		child = windlist.get(1);
+		driver.switchTo().window(child);	
 		if(firstCourse_T_IsDisplayed())
 		{
-		
+			pid = windlist.get(0);
 		}
 		else
 		{
-			driver.switchTo().window(windlist.get(0));
+			pid = windlist.get(1);
+			child = windlist.get(0);
+			driver.switchTo().window(child);
 		}
-	
-	
+		BaseClass.getLogger().info("Getting First course window handle");
    }
 }

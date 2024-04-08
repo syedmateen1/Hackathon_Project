@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import factory.BaseClass;
+
 public class LanguageLearn extends BasePage{
 
 	public LanguageLearn(WebDriver driver) {
@@ -16,7 +18,7 @@ public class LanguageLearn extends BasePage{
 	}
 	
 	
-			
+			//Finding Web Elements 
 	@FindBy(xpath="(//a[@class='cds-119 cds-113 cds-115 css-ia3qe1 cds-142'])[1]")
 	WebElement checkFBS;
 			
@@ -45,44 +47,52 @@ public class LanguageLearn extends BasePage{
 	WebElement enterprise;
     
     public void navigateToForBusiness(){
-    	
+    	BaseClass.getLogger().info("Navigating to For Business section");
     	checkFBS.click();
     }
     
     public boolean availFBS(){
-    	
+    	BaseClass.getLogger().info("Checking For Business button is displayed or not");
     	return checkFBS.isDisplayed();
     }
     
     public void clearSearch() {
     	JavascriptExecutor js=(JavascriptExecutor)driver;
     	js.executeScript("arguments[0].value=' '",searchBox);
+    	BaseClass.getLogger().info("Clearing search box");
     }
 	public void searchBox(String value) {
 		searchBox.sendKeys(value);
+		BaseClass.getLogger().info("Searching values");
 	}
 	
 	public void clickSearch() {
+		BaseClass.getLogger().info("Clicking search button");
 		searchButton.click();
+		
 	}
 	
 	public void clickSeeAll() {
-		seeAll.click();
+		BaseClass.getLogger().info("Clicking See All link");
+		js.executeScript("arguments[0].click();",seeAll);
 	}
 	
 	public boolean SeeAllisDisplayed() {
+		BaseClass.getLogger().info("Checking if See All is displayed or not");
 		return seeAll.isDisplayed();
 	}
 	
 	public boolean LanguageIsDisplayed() {
+		BaseClass.getLogger().info("Checking if Language is displayed or not");
 		return seeAll.isDisplayed();
 	}
 	
 	public void readLanguages() {
+		System.out.println("************Languages************");
 		List<WebElement> languages = driver.findElements(By.xpath("//*[@class='css-zweepb']/label/div/span/span"));
 	     for(WebElement s : languages)
 			{
-				String a = s.getText().replaceAll("[\\(][\\d][\\)]|[\\(][\\d,]+[\\d][\\)]","");
+				String a = s.getText().replaceAll("[\\(][\\d][\\)]|[\\(][\\d,]+[\\d][\\)]","");   // extracting only numbers and languages 
 				
 				String b=s.getText().replaceAll("[\\(][^\\d]+[^\\d][\\)]","");
 				String c=b.replaceAll("([\\( A-Za-z\\)])","");
@@ -93,37 +103,44 @@ public class LanguageLearn extends BasePage{
 				}
 				
 			}
+	     BaseClass.getLogger().info("Extracting Languages");
 	}
 	
 	public void clickClose() {
 		closeButton.click();
+		BaseClass.getLogger().info("Closing See All section");
 	}
 	
 	public void scrollTillLevel() {
 		JavascriptExecutor js=(JavascriptExecutor)driver; 
 	    js.executeScript("window.scrollBy(0,1000)","");
+	    BaseClass.getLogger().info("Scrolling");
 	}
 	
 	public void readLevels() {
+		System.out.println("************Levels************");
 		List<WebElement> levels=driver.findElements(By.xpath("//div[@data-testid='search-filter-group-Level']/div/div/div/label/div/span/span"));
 	    List<String> levelname=new ArrayList<String>();
 	    List<String> levelcount=new ArrayList<String>();
+	    //Extracting levels and count
         for(WebElement l:levels) {
       	    String level=l.getText();
       	    String[] c=level.split(" ");
       	    levelname.add(c[0]);
         }
         for(WebElement l:levels) {
-        	String level=l.getText().replaceAll("[^0-9]","");
+        	String level=l.getText().replaceAll("[^0-9]",""); 
             String[] c=level.split(" ");
         	levelcount.add(c[0]);
         }
         for(int i=0;i<levelname.size();i++) {
 	    	System.out.println(levelname.get(i)+"-"+levelcount.get(i));
 	    }
+        BaseClass.getLogger().info("Extracting Difficulty levels");
 	}
 	
 	public void clickHome() {
+		BaseClass.getLogger().info("Clicking Home Button");
 		homeButton.click();
 	}
 	
@@ -131,12 +148,16 @@ public class LanguageLearn extends BasePage{
 		
 		if((driver.getTitle()).contains("Language Learning"))
 		{
+			BaseClass.getLogger().info("Checking for Language Learning");
 			return true;
+			
 		}
 		else 
 		{
+			BaseClass.getLogger().info("No Language Learning");
 			return false;
 		}
+		
 	}
 	
 

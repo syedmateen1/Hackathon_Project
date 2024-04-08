@@ -17,6 +17,7 @@ public class Hooks {
 
 	 WebDriver driver;
 	 Properties p;
+	 
     
 	@Before
    public void setup() throws IOException
@@ -26,30 +27,34 @@ public class Hooks {
    	p=BaseClass.getProperties();
    	driver.get(p.getProperty("appURL"));
    	driver.manage().window().maximize();
+   	BaseClass.getLogger().info("Website is opened");
    
    			
 	}
+	
+	@After
+	   public void addScreenshot(Scenario scenario) {
+	       
+//	   	 this is for cucumber junit report
+//	       if(scenario.isFailed()) {
+	       	
+	       	TakesScreenshot ts=(TakesScreenshot) driver;
+	       	byte[] screenshot=ts.getScreenshotAs(OutputType.BYTES);
+	       	scenario.attach(screenshot, "image/png",scenario.getName());
+	       	BaseClass.getLogger().info("Taking screenshot"); 	
+	       	            
+//	       }
+	     
+	   }
 		
    
-//   @After
-//   public void tearDown(Scenario scenario){
-//       		
-//      driver.quit();
-//      
-//   }
+   @After (order = 2)
+   public void tearDown(Scenario scenario){
+	   BaseClass.getLogger().info("Quitting the website"); 		
+      driver.quit();
+  	
+   }
    
 
-   @AfterStep
-   public void addScreenshot(Scenario scenario) {
-       
-   	// this is for cucumber junit report
-       if(scenario.isFailed()) {
-       	
-       	TakesScreenshot ts=(TakesScreenshot) driver;
-       	byte[] screenshot=ts.getScreenshotAs(OutputType.BYTES);
-       	scenario.attach(screenshot, "image/png",scenario.getName());
-       	            
-       }
-     
-   }
+   
 }

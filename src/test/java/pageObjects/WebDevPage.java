@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import factory.BaseClass;
+
 public class WebDevPage extends BasePage {
 
 	public static String parentWindow;
@@ -24,6 +26,7 @@ public class WebDevPage extends BasePage {
 		super(driver);
 	}
 	
+	//Finding web elements
 	@FindBy(xpath="(//form[@class='search-form']/div/div[1]/input)[1]")
 	public WebElement searchInputBox;
 	
@@ -69,13 +72,15 @@ public class WebDevPage extends BasePage {
 		//click search
 		js.executeScript("arguments[0].click();",searchButton);
 //		Thread.sleep(2000);
+		BaseClass.getLogger().info("Clearing search box and sending value");
 	}
 	
 	
 	public void clickEnglishCheckBox() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		chkBoxEnglish.click();
-	
+		Thread.sleep(1000);
+		BaseClass.getLogger().info("Clicking English check box");
 	}
 	
 	public void clickBeginnerCheckBox() throws InterruptedException {
@@ -85,27 +90,34 @@ public class WebDevPage extends BasePage {
 		Thread.sleep(3000);
     	checkBoxBeginner.click();
     	js.executeScript("window.scrollBy(0,-1000)","");
+    	Thread.sleep(1000);
+    	BaseClass.getLogger().info("Scrolling and clicking beginner box");
 	}
 	
 	public Boolean isLanguageCheckBoxDisplayed() { 
+		BaseClass.getLogger().info("Checking if Language check box is displayed or not");
     	mywait.until(ExpectedConditions.visibilityOf(LanguageFilter));
     	Boolean result=LanguageFilter.isDisplayed();
     	return result; 
+    	
     }
      
     public Boolean isLevelCheckBoxDisplayed() {
+    	BaseClass.getLogger().info("Checking if Difficult level check box is displayed or not");
     	mywait.until(ExpectedConditions.visibilityOf(LevelFilter));
     	Boolean result=LevelFilter.isDisplayed();
     	return result;  
     }
     
     public Boolean isLanguageCheckBoxClickable() { 
+    	BaseClass.getLogger().info("Checking if Language check box is clickable or not");
     	mywait.until(ExpectedConditions.elementToBeClickable(LanguageFilter));
     	Boolean result=LanguageFilter.isEnabled();
     	return result; 
     }
     
     public Boolean isLevelCheckBoxClickable() { 
+    	BaseClass.getLogger().info("Checking if Difficulty Level check box is clickable or not");
     	mywait.until(ExpectedConditions.elementToBeClickable(LevelFilter));
     	Boolean result=LevelFilter.isEnabled(); 
     	return result;  
@@ -115,6 +127,7 @@ public class WebDevPage extends BasePage {
 	{
 		this.driver=driver;
 		parentWindow=driver.getWindowHandle();
+		BaseClass.getLogger().info("Getting Parent Window");
 	}
 	
 	public void clickFirstCourse() throws InterruptedException
@@ -122,6 +135,7 @@ public class WebDevPage extends BasePage {
 		Thread.sleep(2000);
 		js.executeScript("arguments[0].click();",firstCourse);
 		Thread.sleep(4000);
+		BaseClass.getLogger().info("Clicking First Course");
 	}
 	
 	public void clickSecondCourse() throws InterruptedException
@@ -129,9 +143,11 @@ public class WebDevPage extends BasePage {
 		Thread.sleep(2000);
 		js.executeScript("arguments[0].click();",secondCourse);
 		Thread.sleep(2000);
+		BaseClass.getLogger().info("Clicking Second Course");
 	}
 	
 	public Boolean searchResult(String title) {
+		BaseClass.getLogger().info("Validating the search title");
     	String result=driver.findElement(By.xpath("//div[@data-e2e='NumberOfResultsSection']/span")).getText();
     	if(result.contains(title)) {
     		return true;
@@ -141,30 +157,35 @@ public class WebDevPage extends BasePage {
     }
     
     public Boolean checkLanguageFilterDisplayed() {
+    	BaseClass.getLogger().info("Checking language filter is displayed or not");
     	mywait.until(ExpectedConditions.visibilityOf(LanguageFilter));
     	Boolean result=LanguageFilter.isDisplayed();
     	return result;
     }
     
     public Boolean CheckLanguageFilterEnabled() {
+    	BaseClass.getLogger().info("Checking language filter is Enabled or not");
     	mywait.until(ExpectedConditions.visibilityOf(LanguageFilter));
     	Boolean result=LanguageFilter.isEnabled(); 
     	return result; 
     }
     
     public Boolean checkLevelFilterDisplayed() {
+    	BaseClass.getLogger().info("Checking Difficulty level filter is displayed or not");
     	mywait.until(ExpectedConditions.visibilityOf(LevelFilter));
     	Boolean result=LevelFilter.isDisplayed();
     	return result; 
     }
     
     public Boolean CheckLevelFilterEnabled() {
+    	BaseClass.getLogger().info("Checking Difficulty level filter is Enabled or not");
     	mywait.until(ExpectedConditions.visibilityOf(LevelFilter));
     	Boolean result=LevelFilter.isEnabled(); 
     	return result; 
     }
     
     public Boolean isEnglishFilterDisplayed() {
+    	BaseClass.getLogger().info("Checking English filter is displayed or not");
     	mywait.until(ExpectedConditions.visibilityOf(EnglishFilter));
     	String name=EnglishFilter.getText();
 	    if(name.contains("Language: English")) {
@@ -176,6 +197,7 @@ public class WebDevPage extends BasePage {
     }
     
     public Boolean isBeginnerFilterDisplayed() {
+    	BaseClass.getLogger().info("Checking Beginner filter is displayed or not");
     	mywait.until(ExpectedConditions.visibilityOf(BeginnerFilter));
     	String name1=BeginnerFilter.getText();
 	    if(name1.contains("Beginner")) {
@@ -188,6 +210,7 @@ public class WebDevPage extends BasePage {
 	
 	public boolean invalidSearch()
 	{
+		BaseClass.getLogger().info("Checking valid search or not");
 		return chkBoxEnglish.isDisplayed();
 	}
 }
