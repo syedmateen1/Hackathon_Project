@@ -18,10 +18,10 @@ public class HomePage extends BasePage {
 	
 	JavascriptExecutor js=(JavascriptExecutor)driver;
 	//Finding WebElements 
-//	@FindBy(xpath="//*[@placeholder='What do you want to learn?']") 
-//	WebElement searchInputBox;
-	@FindBy(xpath="//input[@class='react-autosuggest__input']") 
+	@FindBy(xpath="//*[@placeholder='What do you want to learn?']") 
 	WebElement searchInputBox;
+//	@FindBy(xpath="//input[@class='react-autosuggest__input']") 
+//	WebElement searchInputBox;
 	
 	@FindBy(xpath="//button[@class='nostyle search-button']") 
 	WebElement searchButton;
@@ -72,8 +72,8 @@ public class HomePage extends BasePage {
 		searchInputBox.click();
 	}
 	
-	public void searchCourse(String string)
-	{
+	public void searchCourse(String string) throws InterruptedException
+	{	Thread.sleep(5000);
 		searchInputBox.sendKeys(string);
 	}
 	
