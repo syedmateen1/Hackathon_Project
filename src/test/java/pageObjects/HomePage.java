@@ -18,7 +18,9 @@ public class HomePage extends BasePage {
 	
 	JavascriptExecutor js=(JavascriptExecutor)driver;
 	//Finding WebElements 
-	@FindBy(xpath="//*[@placeholder='What do you want to learn?']") 
+//	@FindBy(xpath="//*[@placeholder='What do you want to learn?']") 
+//	WebElement searchInputBox;
+	@FindBy(xpath="//input[@class='react-autosuggest__input']") 
 	WebElement searchInputBox;
 	
 	@FindBy(xpath="//button[@class='nostyle search-button']") 
