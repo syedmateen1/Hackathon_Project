@@ -15,8 +15,8 @@ public class TC_FTC_01 {
 	WebDevPage wdp = new WebDevPage(BaseClass.getDriver());
 
 	@Given("Search for {string}")
-	public void search_for(String string) {
-
+	public void search_for(String string) throws InterruptedException {
+		
 		hp.searchCourse(string);
 		hp.clickSearchButton();
 	}
