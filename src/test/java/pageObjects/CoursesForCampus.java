@@ -1,11 +1,15 @@
 package pageObjects;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+
+import utilities.ExcelReadWrite;
 
 
 
@@ -129,6 +133,8 @@ public class CoursesForCampus extends BasePage{
 	@FindBy(xpath="//*[@class='cds-119 css-1euneyv cds-121']")
 	WebElement successMsg;
 	
+	
+	String filepath =System.getProperty("user.dir")+"\\testData\\TestData.xlsx";
 	
 	
 	
@@ -388,18 +394,21 @@ public class CoursesForCampus extends BasePage{
 	public String getEMemail() {
 		return errormsgemail.getText(); 
 	}
-	public boolean getErrorMsg() {
+	public boolean getErrorMsg() throws IOException {
 
-			System.out.println("************The Error is************");
-
-			System.out.println(errormsg.getText()); 
+//			System.out.println("************The Error is************");
+//			System.out.println(errormsg.getText()); 
+			ExcelReadWrite.setCellData(filepath,"Sheet5",2,2,errormsg.getText());
+			
 			
 			if(errormsg.getText().contains("Must be valid email."))
 			{
+				ExcelReadWrite.setCellData(filepath,"Sheet5",3,2,"message matched");
 				return true;
 			}
 			else 
 			{
+				ExcelReadWrite.setCellData(filepath,"Sheet5",3,2,"message not matched");
 				return false;
 			}
 	}

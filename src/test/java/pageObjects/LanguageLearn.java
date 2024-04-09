@@ -1,5 +1,6 @@
 package pageObjects;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import factory.BaseClass;
+import utilities.ExcelReadWrite;
 
 public class LanguageLearn extends BasePage{
 
@@ -45,6 +47,10 @@ public class LanguageLearn extends BasePage{
     //For Enterprise:
     @FindBy(xpath="//a[normalize-space()='For Enterprise']")
 	WebElement enterprise;
+    
+    
+    String filepath =System.getProperty("user.dir")+"\\testData\\TestData.xlsx";
+
     
     public void navigateToForBusiness(){
     	BaseClass.getLogger().info("Navigating to For Business section");
@@ -87,10 +93,12 @@ public class LanguageLearn extends BasePage{
 		return seeAll.isDisplayed();
 	}
 	
-	public void readLanguages() {
-		System.out.println("************Languages************");
+	public void readLanguages() throws IOException {
+//		System.out.println("************Languages************");
 		List<WebElement> languages = driver.findElements(By.xpath("//*[@class='css-zweepb']/label/div/span/span"));
-	     for(WebElement s : languages)
+	     
+		int row =3;
+		for(WebElement s : languages)
 			{
 				String a = s.getText().replaceAll("[\\(][\\d][\\)]|[\\(][\\d,]+[\\d][\\)]","");   // extracting only numbers and languages 
 				
@@ -99,7 +107,12 @@ public class LanguageLearn extends BasePage{
 				
 				for(int i=0;i<1;i++)
 				{
-					System.out.println(a+"-"+c);
+					int col=1;
+//					System.out.println(a+"-"+c);
+					ExcelReadWrite.setCellData(filepath,"Sheet3",row,col,a);
+					col++;
+					ExcelReadWrite.setCellData(filepath,"Sheet3",row,col,c);
+					row++;
 				}
 				
 			}
@@ -117,8 +130,8 @@ public class LanguageLearn extends BasePage{
 	    BaseClass.getLogger().info("Scrolling");
 	}
 	
-	public void readLevels() {
-		System.out.println("************Levels************");
+	public void readLevels() throws IOException {
+//		System.out.println("************Levels************");
 		List<WebElement> levels=driver.findElements(By.xpath("//div[@data-testid='search-filter-group-Level']/div/div/div/label/div/span/span"));
 	    List<String> levelname=new ArrayList<String>();
 	    List<String> levelcount=new ArrayList<String>();
@@ -133,8 +146,14 @@ public class LanguageLearn extends BasePage{
             String[] c=level.split(" ");
         	levelcount.add(c[0]);
         }
+        int row =3;
         for(int i=0;i<levelname.size();i++) {
-	    	System.out.println(levelname.get(i)+"-"+levelcount.get(i));
+//	    	System.out.println(levelname.get(i)+"-"+levelcount.get(i));
+        	int col=1;
+        	ExcelReadWrite.setCellData(filepath,"Sheet4",row,col,levelname.get(i));
+        	col++;
+        	ExcelReadWrite.setCellData(filepath,"Sheet4",row,col,levelcount.get(i));
+        	row++;
 	    }
         BaseClass.getLogger().info("Extracting Difficulty levels");
 	}

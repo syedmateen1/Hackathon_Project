@@ -1,5 +1,7 @@
 package stepDefinitions;
 
+import java.io.IOException;
+
 import org.junit.Assert;
 
 import factory.BaseClass;
@@ -36,7 +38,7 @@ public class TC_ETE_01 {
 	}
 
 	@Then("Extract the First course name, total learning hours and rating")
-	public void extract_the_first_course_name_total_learning_hours_and_rating() throws InterruptedException {
+	public void extract_the_first_course_name_total_learning_hours_and_rating() throws InterruptedException, IOException {
 		
 		fcp.getWindowHandlesListF();
 		fcp.firstCourseDetails();
@@ -47,7 +49,7 @@ public class TC_ETE_01 {
 	}
 
 	@Then("Extract the Second course names, total learning hours and rating")
-	public void extract_the_second_course_names_total_learning_hours_and_rating() throws InterruptedException {
+	public void extract_the_second_course_names_total_learning_hours_and_rating() throws InterruptedException, IOException {
 		scp.getWindowHandlesListS();
 		scp.secondCourseDetails();
 		hp.PageClose();
@@ -63,7 +65,7 @@ public class TC_ETE_01 {
 	}
 
 	@Then("Extract all the languages with count")
-	public void extract_all_the_languages_with_count() {
+	public void extract_all_the_languages_with_count() throws IOException {
 		ll.readLanguages();
 		
 	}
@@ -75,7 +77,7 @@ public class TC_ETE_01 {
 	}
 
 	@Then("Extract Different levels with count")
-	public void extract_different_levels_with_count() {
+	public void extract_different_levels_with_count() throws IOException {
 		ll.readLevels();
 		
 	}
@@ -120,7 +122,7 @@ public class TC_ETE_01 {
 	}
 
 	@Then("Capture the error message and display")
-	public void capture_the_error_message_and_display() {
+	public void capture_the_error_message_and_display() throws IOException {
 		Assert.assertEquals(cfc.getErrorMsg(),true);
 		
 	}

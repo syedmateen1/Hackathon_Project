@@ -1,5 +1,6 @@
 package pageObjects;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -9,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import factory.BaseClass;
-import junit.framework.Assert;
+import utilities.ExcelReadWrite;
 
 public class FirstCoursePage extends BasePage {
 
@@ -19,6 +20,8 @@ public class FirstCoursePage extends BasePage {
 	
 	private static String pid;
 	private static String child;
+	
+	String filepath =System.getProperty("user.dir")+"\\testData\\TestData.xlsx";
 	
 	public FirstCoursePage(WebDriver driver) {
 		super(driver);
@@ -59,18 +62,24 @@ public class FirstCoursePage extends BasePage {
 			
 	}
 	
-	public void firstCourseDetails()
+	public void firstCourseDetails() throws IOException
 	{
 		BaseClass.getLogger().info("Getting the first first course details");
 		WebDevPage.courseTitles.add(firstCourseTitle.getText());
 		WebDevPage.courseHours.add(firstCourseHours.getText());
 		WebDevPage.courseRatings.add(firstCourseRating.getText());
-		System.out.println("**********************************************************************************************");
-		System.out.println("First Course");
-		System.out.println("Title : "+WebDevPage.courseTitles.get(0));
-		System.out.println("Hours : "+WebDevPage.courseHours.get(0));
-		System.out.println("Rating : "+WebDevPage.courseRatings.get(0));
-		System.out.println("**********************************************************************************************");		
+		
+		ExcelReadWrite.setCellData(filepath,"Sheet2",2,2,WebDevPage.courseTitles.get(0));
+		ExcelReadWrite.setCellData(filepath,"Sheet2",3,2,WebDevPage.courseHours.get(0));
+		ExcelReadWrite.setCellData(filepath,"Sheet2",4,2,WebDevPage.courseRatings.get(0));
+		
+		
+//		System.out.println("**********************************************************************************************");
+//		System.out.println("First Course");
+//		System.out.println("Title : "+WebDevPage.courseTitles.get(0));
+//		System.out.println("Hours : "+WebDevPage.courseHours.get(0));
+//		System.out.println("Rating : "+WebDevPage.courseRatings.get(0));
+//		System.out.println("**********************************************************************************************");		
 		
 	}
 	
