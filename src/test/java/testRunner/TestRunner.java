@@ -7,8 +7,8 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-//					features= {".//Features/","@target/rerun.txt"},
-					features= {".//Features/TS_007_End_to_End_test_based_on_the_requirement.feature"},
+					features= {".//Features/TS_001_Home_Page.feature"},
+					//features= {".//Features/TS_007_End_to_End_test_based_on_the_requirement.feature"},
 //					features= {".//Features/TS_005_Language_Level_Filters 1.feature"},
 					//features= {".//Features/LoginDDTExcel.feature"},
 //					features= {".//Features/Login.feature",".//Features/Registration.feature"},
@@ -21,7 +21,7 @@ import io.cucumber.junit.CucumberOptions;
 							
 					dryRun=false,    // checks mapping between scenario steps and step definition methods
 					monochrome=true,    // to avoid junk characters in output
-					publish=true,   // to publish report in cucumber server
+					publish=true   // to publish report in cucumber server
 					//tags="@smoke"  // this will execute scenarios tagged with @smoke
 					//tags="@regression"
 					//tags="@smoke and @regression" //Scenarios tagged with both @smoke and @regression
