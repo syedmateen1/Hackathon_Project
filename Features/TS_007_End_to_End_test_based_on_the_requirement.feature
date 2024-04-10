@@ -1,6 +1,6 @@
 Feature: TS_007 End to End test based on the requirement
 
-  @smoke @regression
+  
   Scenario: TC_ETE_01 The respective error message should be displayed
     Given Search for "Web Development Courses"
     Then Click English Language checkbox
