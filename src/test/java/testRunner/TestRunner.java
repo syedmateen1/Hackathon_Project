@@ -26,7 +26,7 @@ import io.cucumber.junit.CucumberOptions;
 					//tags="@regression"
 					//tags="@smoke and @regression" //Scenarios tagged with both @smoke and @regression
 					//tags="@smoke and not @regression" //Scenarios tagged with @smoke but not tagged with @regression
-					tags="@smoke or @regression" //Scenarios tagged with either @smoke or @regression
+					tags="@smoke", "@regression" //Scenarios tagged with either @smoke or @regression
 		)
 public class TestRunner {
 
